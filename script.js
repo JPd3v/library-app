@@ -1,38 +1,50 @@
 let myLibrary = [];
 let id = 0
 
-function Book(title, author, pages, readed,id) {
+function Book(title, author, pages, readed, id) {
     this.title = title
     this.author = author
     this.pages = pages
     this.readed = readed
-    this.id =id
+    this.id = id
 }
 
-function addBookToLibrary(title, author, pages, readed,id) {
-    let book = new Book(title, author, pages, readed,id)
+Book.prototype.readedStatus = function () {
+    return (this.readed === true) ? this.readed = false : this.readed =true
+}
+
+function addBookToLibrary(title, author, pages, readed, id) {
+    let book = new Book(title, author, pages, readed, id)
     return myLibrary.push(book)
 }
 
 function displayLibrary(element) {
     let container = document.querySelector(".container")
-
     let card = document.createElement("div")
     let title = document.createElement("div")
     let author = document.createElement("div")
     let pages = document.createElement("div")
-    let readed = document.createElement("div")
+    let readed = document.createElement("input")
+    let readedLabel = document.createElement("label")
     let deleteButton = document.createElement("button")
     let svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     let svgPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-    svg.setAttribute("data-attribute",id)
-    svgPath.setAttribute("data-attribute", idIncrement())
+    card.setAttribute("data-attribute", idIncrement())
+
+    readedLabel.setAttribute("style","width: fit-content;")
+    readedLabel.textContent="do you read it?"
+    readed.setAttribute("type", "checkbox")
+    readed.setAttribute("id", "readed")
+    readed.addEventListener("click",()=>{
+         let foundBook =findBook(readed.closest(".card").getAttribute("data-attribute"))
+        return myLibrary[foundBook].readedStatus()
+    })
     deleteButton.classList.add('delete-button')
-    deleteButton.addEventListener("click", (e)=>{
-        let found= findBook(Number(e.target.dataset.attribute))
+    deleteButton.addEventListener("click", (e) => {
+        let found = findBook(e.target.closest(".card").getAttribute("data-attribute"))
         e.target.closest(".card").remove()
-         return myLibrary.splice(found,1)
+        return myLibrary.splice(found, 1)
     })
     svg.setAttribute("style", "width:24px;height:24px")
     svg.setAttribute("viewBox", "0 0 24 24")
@@ -42,37 +54,18 @@ function displayLibrary(element) {
     title.textContent = `title: ${element.title}`
     author.textContent = `author:${element.author}`
     pages.textContent = `pages: ${element.pages}`
-    readed.textContent = `readed: ${element.readed}`
-
+    readed.checked = element.readed
 
     card.classList.add("card")
     card.appendChild(title)
     card.appendChild(author)
     card.appendChild(pages)
-    card.appendChild(readed)
+    card.appendChild(readedLabel)
+    readedLabel.appendChild(readed)
     card.appendChild(deleteButton)
     deleteButton.appendChild(svg)
     svg.appendChild(svgPath)
     container.appendChild(card)
-
-    // for (const element of myLibrary) {
-    //     let book = document.createElement("div")
-    //     let title = document.createElement("div")
-    //     let author = document.createElement("div")
-    //     let pages = document.createElement("div")
-    //     let readed = document.createElement("div")
-    //     title.textContent = element.title
-    //     author.textContent = element.author
-    //     pages.textContent = element.pages
-    //     readed.textContent = element.readed
-
-    //     book.classList.add("book")
-    //     book.appendChild(title)
-    //     book.appendChild(author)
-    //     book.appendChild(pages)
-    //     book.appendChild(readed)
-    //     container.appendChild(book)
-    // }
 }
 
 let openModal = document.querySelector(".btn-open-modal")
@@ -90,7 +83,7 @@ openModal.addEventListener("click", () => {
 })
 
 addABook.addEventListener("click", () => {
-    addBookToLibrary(title.value, author.value, pages.value, readed.checked,id)
+    addBookToLibrary(title.value, author.value, pages.value, readed.checked, id)
     displayLibrary(myLibrary[myLibrary.length - 1])
     closeModal()
     resetInputsValues()
@@ -116,11 +109,11 @@ function idIncrement() {
     return id++
 }
 
-
-function removeBook(id){
+function removeBook(id) {
     return myLibrary.splice(id["data-attribute"])
 }
-function findBook(numero){
-    let foundBook = myLibrary.findIndex(e=>e.id === numero)
-    return foundBook
+
+function findBook(number) {
+    return myLibrary.findIndex(e => e.id === parseInt(number))
 }
+
