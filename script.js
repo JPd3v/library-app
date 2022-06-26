@@ -1,16 +1,17 @@
 let myLibrary = [];
 let id = 0
 
-function Book(title, author, pages, readed, id) {
-    this.title = title
-    this.author = author
-    this.pages = pages
-    this.readed = readed
-    this.id = id
-}
-
-Book.prototype.readedStatus = function () {
-    return (this.readed === true) ? this.readed = false : this.readed =true
+class Book {
+    constructor(title, author, pages, readed, id){
+        this.title = title
+        this.author = author
+        this.pages = pages
+        this.readed = readed
+        this.id = id  
+    }
+    readedStatus(){
+        return (this.readed === true) ? this.readed = false : this.readed =true
+    }
 }
 
 function addBookToLibrary(title, author, pages, readed, id) {
@@ -31,21 +32,21 @@ function displayLibrary(element) {
     let svgPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
     card.setAttribute("data-attribute", idIncrement())
-
     readedLabel.setAttribute("style","width: fit-content;")
     readedLabel.textContent="do you read it?"
     readed.setAttribute("type", "checkbox")
-    readed.setAttribute("id", "readed")
     readed.addEventListener("click",()=>{
          let foundBook =findBook(readed.closest(".card").getAttribute("data-attribute"))
         return myLibrary[foundBook].readedStatus()
     })
+    
     deleteButton.classList.add('delete-button')
     deleteButton.addEventListener("click", (e) => {
         let found = findBook(e.target.closest(".card").getAttribute("data-attribute"))
         e.target.closest(".card").remove()
         return myLibrary.splice(found, 1)
     })
+
     svg.setAttribute("style", "width:24px;height:24px")
     svg.setAttribute("viewBox", "0 0 24 24")
     svgPath.setAttribute("fill", "currentColor")
