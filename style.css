@@ -1,109 +1,141 @@
 * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 .app-wrapper {
-    display: grid;
-    grid-template-rows:  auto 1fr;
-    grid-template-columns: 100vw;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 100vw;
 }
 
 .navbar {
-    background: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 5px 30px;
+  background: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 30px;
 }
 
 .btn-add-book,
 .btn-cancel,
 .btn-open-modal {
-    border: 0;
-    border-radius: 11px;
-    padding: 10px;
-    cursor: pointer;
+  border: 0;
+  border-radius: 11px;
+  padding: 10px;
+  cursor: pointer;
 }
 
 .btn-open-modal {
-    background: #0e8ff6;
-    color: white;
+  background: #0e8ff6;
+  color: white;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 23%));
-    gap: 16px;
-    justify-content: center;
-    padding: 16px 0px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 23%));
+  gap: 16px;
+  justify-content: center;
+  padding: 16px 0px;
 }
 
 .card {
-    position: relative;
-    background: white;
-    height: 200px;
-    overflow: auto;
-    padding: 35px 0px 0px 15px;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    border-radius: 5px;
-    background:#B1EDE8;
+  position: relative;
+  background: white;
+  height: 200px;
+  overflow: auto;
+  padding: 35px 0px 0px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  border-radius: 5px;
+  background: #b1ede8;
 }
 
 .card input {
-    margin-left: 5px;
+  margin-left: 5px;
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
-    justify-content: center;
-    align-items: center;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
-    background-color: rgb(255, 255, 255);
-    width: 40%;
-    height: 50%;
-    display: flex;
-    flex-direction: column;
-    padding: 24px;
-    justify-content: center;
-    gap: 4px;
+  background-color: rgb(255, 255, 255);
+  width: 45%;
+  height: 65%;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  justify-content: center;
+  border-radius: 7px;
 }
 
-.btn-add-book{
-    background: #26ca2d;
-    color: white;
+.modal-content form {
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  justify-content: center;
+  gap: 33px;
 }
 
-.btn-cancel{
-    background: #ca2626;
-    color: white;
+form .input-error {
+  position: absolute;
+  color: rgb(255, 0, 0);
+  top: 27px;
+  left: 67px;
+}
+
+form label {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 56px 3fr;
+  text-align: right;
+  gap: 10px;
+  align-items: center;
+  position: relative;
+}
+
+form .form-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.btn-add-book {
+  background: #26ca2d;
+  color: white;
+}
+
+.btn-cancel {
+  background: #ca2626;
+  color: white;
 }
 .svg-size {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .delete-button {
-    position: absolute;
-    background: none;
-    border: none;
-    top: 0;
-    right: 0;
-    cursor: pointer;
+  position: absolute;
+  background: none;
+  border: none;
+  top: 0;
+  right: 0;
+  cursor: pointer;
 }
